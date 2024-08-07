@@ -28,5 +28,18 @@ def user_add_controller():
     print(result)
     return result
 
+# # PUT CALL
+# @app.route("/product/update", methods=["PUT"])
+# def product_update_controller():
+#     obj = product_model()
+#     return obj.product_update_model(request.form)
+
+# # DELETE CALL
+# @app.route("/product/delete/<id>", methods=["DELETE"])
+# def product_delete_controller(id):
+#     obj = product_model()
+#     return obj.product_delete_model(id)
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
