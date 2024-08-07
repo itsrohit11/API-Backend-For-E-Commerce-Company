@@ -19,6 +19,11 @@ def user_get_controller():
     obj = user_model()
     return obj.user_get_model()
 
+@app.route("/user/getid/<product_id>")
+def user_getid_controller(product_id):
+    obj = user_model()
+    return obj.user_getid_model(product_id)
+
 @app.route("/user/add", methods=["POST"])
 def user_add_controller():
     obj = user_model()
