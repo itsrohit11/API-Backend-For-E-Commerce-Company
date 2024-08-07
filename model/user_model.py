@@ -1,3 +1,5 @@
+# from flask import jsonify
+from itertools import product
 import mysql.connector
 import json
 class user_model():
@@ -5,15 +7,18 @@ class user_model():
         try:
             self.con = mysql.connector.connect(host='localhost', database='flask_tutorial', user='root', password="rohit6113")
             self.con.autocommit=True
-            self.cur=self.con.cursor()
+            self.cur=self.con.cursor(dictionary=True)
             print("connection successful")
         except:
             print("connection failed")
+
     def user_get_model(self):
         self.cur.execute("SELECT * FROM users")
         result = self.cur.fetchall()
         if len(result) > 0:
-            return json.dumps(result)
+            print(result)
+            # return json.dumps(result)
+            return{"payload":result}
         else:
             return "no data available"
     
@@ -24,19 +29,25 @@ class user_model():
         return "Data Added Successfully"
     
 
-    # # PUT QUERY
-    # def product_update_model(self, data):
-    #     self.cur.execute(f"UPDATE product SET product_product_name='{data['product_product_name']}',product_category='{data['product_category']}= product_description='{data['product_description']}',product_price='{data['product_price']}'' WHERE id ={data['id']} ")
-    #     if self.cur.rowcount>0:
-    #         return {"meassage":"Product Updated Successfully"}
-    #     else:
-    #         return {"meassage":"Product Not Found"}
+    # PUT QUERY
+    def user_update_model(self,data):
+        self.cur=self.con.cursor()
+        self.cur.execute(f"UPDATE users SET product_name='{data['product_name']}',product_category='{data['product_category']}',product_description='{data['product_description']}', product_price='{data['product_price']}' WHERE product_id={data['product_id']}" ) 
+        if self.cur.rowcount>0:
+            return "Data Updated Successfully"
+        else:
+            return "Invalid Updation"
         
-    # # DELETE QUERY
-    # def product_delete_model(self, id):
-    #     self.cur.execute(f"DELETE FROM product WHERE id={id}")
-    #     if self.cur.rowcount>0:
-    #         return {"meassage":"Product Deleted Successfully"}
-    #     else:
-    #         return {"meassage":"Product Not Found"}
+    # PUT QUERY
+    def user_delete_model(self,id):
+        self.cur=self.con.cursor()
+        self.cur.execute(f"DELETE FROM users WHERE product_id={id}") 
+        if self.cur.rowcount>0:
+            return "Data Deleted Successfully"
+        else:
+            return "No Data available"
+
+        
+    
+    
 

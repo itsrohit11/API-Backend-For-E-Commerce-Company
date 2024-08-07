@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request    
 from model.user_model import user_model
 app = Flask(__name__)
 
@@ -28,17 +28,17 @@ def user_add_controller():
     print(result)
     return result
 
-# # PUT CALL
-# @app.route("/product/update", methods=["PUT"])
-# def product_update_controller():
-#     obj = product_model()
-#     return obj.product_update_model(request.form)
+# PUT CALL
+@app.route("/user/update", methods=["PUT"])
+def user_update_controller():
+    obj = user_model()
+    return obj.user_update_model(request.form)
 
-# # DELETE CALL
-# @app.route("/product/delete/<id>", methods=["DELETE"])
-# def product_delete_controller(id):
-#     obj = product_model()
-#     return obj.product_delete_model(id)
+# DELETE CALL
+@app.route("/user/delete/<product_id>", methods=["DELETE"])
+def user_delete_controller(product_id):
+    obj = user_model()
+    return obj.user_delete_model(product_id)
     
 
 if __name__ == "__main__":
